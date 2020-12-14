@@ -1,4 +1,4 @@
-# ACI Multenant Example
+# ACI Multitenant Example
 
 The general idea is to have a single playbook to build/amend a given Tenant in ACI, then customer specific vars files holding info pertaining to the given customer.
 
