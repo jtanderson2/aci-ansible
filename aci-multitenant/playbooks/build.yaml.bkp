@@ -1,0 +1,96 @@
+---
+- name: TENANT BUILD
+  hosts: apic
+  connection: local
+  gather_facts: False
+
+  tasks:
+  
+    - name: INCLUDE VARIABLES
+      include_vars:
+        file: "../customers/{{customer}}/vars/tenant.yaml"
+        name: tenant
+
+    - name: ENSURE TENANT EXISTS
+      cisco.aci.aci_tenant:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        state: "present"
+        validate_certs: False
+        tenant: "{{ item.value.tenant }}"
+      loop: "{{ lookup('dict', tenant) }}"
+
+    - name: ENSURE VRF EXISTS
+      cisco.aci.aci_vrf:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        state: "present"
+        validate_certs: False
+        tenant: "{{ item.value.tenant }}"
+        vrf: "{{ item.value.vrf }}"
+      loop: "{{ lookup('dict', tenant) }}"
+  
+    - name: ENSURE AP EXISTS
+      cisco.aci.aci_ap:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        ap: "{{ item.value.ap }}"
+        validate_certs: False
+        tenant: "{{ item.value.tenant }}"
+        state: "present"
+      loop: "{{ lookup('dict', tenant) }}"
+    
+    - name: ENSURE BD EXISTS  
+      cisco.aci.aci_bd:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: False
+        state: "present"
+        tenant: "{{ item.value.tenant }}"
+        bd: "{{ item.value.bd }}"
+        vrf: "{{ item.value.vrf }}"
+      loop: "{{ lookup('dict', tenant) }}"
+
+    - name: ENSURE BD SUBNET EXISTS
+      cisco.aci.aci_bd_subnet:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: False
+        state: "present"
+        tenant: "{{ item.value.tenant }}"
+        bd: "{{ item.value.bd }}"
+        gateway: "{{ item.value.bd_gateway }}"
+        mask: "{{ item.value.bd_mask }}"
+        scope: "{{ item.value.bd_scope }}"
+      loop: "{{ lookup('dict', tenant) }}" 
+
+    - name: ENSURE EPG EXISTS
+      cisco.aci.aci_epg:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: "{{ item.value.tenant }}"
+        ap: "{{ item.value.ap }}"
+        epg: "{{ item.value.epg }}"
+        bd: "{{ item.value.bd }}"
+        state: "present"
+      loop: "{{ lookup('dict', tenant) }}"
+
+    - name: EPG DOMAIN MAPPINGS
+      cisco.aci.aci_epg_to_domain:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: "{{ item.value.tenant }}"
+        ap: "{{ item.value.ap }}"
+        epg: "{{ item.value.epg }}"
+        domain: "{{ item.value.pd }}"
+        domain_type: phys
+        state: present
+      loop: "{{ lookup('dict', tenant) }}" 
+
