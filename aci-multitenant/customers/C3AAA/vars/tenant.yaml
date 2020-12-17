@@ -1,5 +1,5 @@
 ---
-epg-1:
+PRD_A-EPG:
    tenant: C3AAA
    vrf: C3AAA-VRF
    bd: PRD_A-BD
@@ -7,10 +7,9 @@ epg-1:
    bd_mask: 24
    bd_scope: private
    ap: PRD_A-AP
-   epg: PRD_A-EPG
    pd: DOM1-PD
 
-epg-2:
+PRD_B-EPG:
    tenant: C3AAA
    vrf: C3AAA-VRF
    bd: PRD_B-BD
@@ -18,10 +17,9 @@ epg-2:
    bd_mask: 24
    bd_scope: private
    ap: PRD_B-AP
-   epg: PRD_B-EPG
    pd: DOM1-PD
  
-epg-3:
+PRD_C-EPG:
    tenant: C3AAA
    vrf: C3AAA-VRF
    bd: PRD_C-BD
@@ -29,5 +27,4 @@ epg-3:
    bd_mask: 24
    bd_scope: private
    ap: PRD_C-AP
-   epg: PRD_C-EPG
    pd: DOM1-PD

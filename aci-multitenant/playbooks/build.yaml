@@ -76,7 +76,7 @@
         password: "{{ password }}"
         tenant: "{{ item.value.tenant }}"
         ap: "{{ item.value.ap }}"
-        epg: "{{ item.value.epg }}"
+        epg: "{{ item.key }}"
         bd: "{{ item.value.bd }}"
         state: "present"
       loop: "{{ lookup('dict', tenant) }}"
@@ -88,7 +88,7 @@
         password: "{{ password }}"
         tenant: "{{ item.value.tenant }}"
         ap: "{{ item.value.ap }}"
-        epg: "{{ item.value.epg }}"
+        epg: "{{ item.key }}"
         domain: "{{ item.value.pd }}"
         domain_type: phys
         state: present
