@@ -1,0 +1,22 @@
+---
+- name: TAG EPGS
+  hosts: apic
+  connection: local
+  gather_facts: False
+
+  tasks:
+
+    - name: CSV TO DICTIONARY
+      community.general.read_csv:
+        path: epgs.csv
+        key: key
+      register: epgs
+
+    - debug:
+        msg: "{{ item.key }}
+              {{ item.value.tenant }}
+              {{ item.value.ap }}
+              {{ item.value.epg }}
+              {{ item.value.aaep }}
+              {{ item.value.vlan }}"
+      loop: "{{ epgs.dict|dict2items }}"
