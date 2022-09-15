@@ -11,6 +11,7 @@
         host: "{{ inventory_hostname }}"
         username: "{{ username }}"
         password: "{{ password }}"
+        validate_certs: False
         domain: DOM1-PD
         domain_type: phys
         state: present
