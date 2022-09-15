@@ -11,7 +11,7 @@
         file: "../customers/{{customer}}/vars/tenant.yaml"
         name: tenant
 
-    - name: ENSURE TENANT EXISTS
+    - name: TENANT
       cisco.aci.aci_tenant:
         host: "{{ inventory_hostname }}"
         username: "{{ username }}"
@@ -21,7 +21,7 @@
         tenant: "{{ item.value.tenant }}"
       loop: "{{ lookup('dict', tenant) }}"
 
-    - name: ENSURE VRF EXISTS
+    - name: VRF
       cisco.aci.aci_vrf:
         host: "{{ inventory_hostname }}"
         username: "{{ username }}"
@@ -32,7 +32,7 @@
         vrf: "{{ item.value.vrf }}"
       loop: "{{ lookup('dict', tenant) }}"
   
-    - name: ENSURE AP EXISTS
+    - name: AP
       cisco.aci.aci_ap:
         host: "{{ inventory_hostname }}"
         username: "{{ username }}"
@@ -43,7 +43,7 @@
         state: "present"
       loop: "{{ lookup('dict', tenant) }}"
     
-    - name: ENSURE BD EXISTS  
+    - name: BD  
       cisco.aci.aci_bd:
         host: "{{ inventory_hostname }}"
         username: "{{ username }}"
@@ -55,7 +55,7 @@
         vrf: "{{ item.value.vrf }}"
       loop: "{{ lookup('dict', tenant) }}"
 
-    - name: ENSURE BD SUBNET EXISTS
+    - name: BD SUBNET
       cisco.aci.aci_bd_subnet:
         host: "{{ inventory_hostname }}"
         username: "{{ username }}"
@@ -69,7 +69,7 @@
         scope: "{{ item.value.bd_scope }}"
       loop: "{{ lookup('dict', tenant) }}" 
 
-    - name: ENSURE EPG EXISTS
+    - name: EPG
       cisco.aci.aci_epg:
         host: "{{ inventory_hostname }}"
         username: "{{ username }}"
@@ -81,7 +81,7 @@
         state: "present"
       loop: "{{ lookup('dict', tenant) }}"
 
-    - name: EPG DOMAIN MAPPINGS
+    - name: EPG TO DOMAIN
       cisco.aci.aci_epg_to_domain:
         host: "{{ inventory_hostname }}"
         username: "{{ username }}"
