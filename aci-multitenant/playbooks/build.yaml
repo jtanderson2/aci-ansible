@@ -74,6 +74,7 @@
         host: "{{ inventory_hostname }}"
         username: "{{ username }}"
         password: "{{ password }}"
+        validate_certs: False
         tenant: "{{ item.value.tenant }}"
         ap: "{{ item.value.ap }}"
         epg: "{{ item.key }}"
@@ -86,6 +87,7 @@
         host: "{{ inventory_hostname }}"
         username: "{{ username }}"
         password: "{{ password }}"
+        validate_certs: False
         tenant: "{{ item.value.tenant }}"
         ap: "{{ item.value.ap }}"
         epg: "{{ item.key }}"
