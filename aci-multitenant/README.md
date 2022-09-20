@@ -4,7 +4,7 @@ The general idea is to have a single playbook to build/amend a given Tenant in A
 
 Run from within the project root folder with:
 
-ansible-playbook playbooks/build.yaml -e "customer=C3AAA"
+```ansible-playbook playbooks/build.yaml -e "customer=C3AAA"```
 
 In the example above, we are running the vars file from the 'C3AAA' customer folder. Add more customer folders and vars as required.
 
