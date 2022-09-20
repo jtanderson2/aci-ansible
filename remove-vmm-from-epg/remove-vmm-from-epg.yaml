@@ -1,0 +1,42 @@
+---
+- name: REMOVE DOMAIN FROM EPG
+  hosts: apic
+  connection: local
+  gather_facts: False
+  
+  vars_prompt:
+    - name: username
+      prompt: "Please enter ACI username"
+      private: no
+    - name: password 
+      prompt: "password"
+      private: yes
+    
+  tasks:
+    - read_csv:
+        path: epginfo.csv
+        key: index
+      register: epginfo
+    
+    - debug:
+        msg: "{{ item.key }}:
+              {{ item.value.tenant }},
+              {{ item.value.ap }},
+              {{ item.value.epg }}
+              {{ item.value.dom }}"
+      loop: "{{ epginfo.dict|dict2items }}"
+
+    - name: REMOVE DOMAIN
+      cisco.aci.aci_epg_to_domain:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: "{{ item.value.tenant }}"
+        ap: "{{ item.value.ap }}"
+        epg: "{{ item.value.epg }}"
+        domain: "{{ item.value.dom }}"
+        domain_type: vmm
+        vm_provider: vmware
+        state: absent
+        validate_certs: False    
+      loop: "{{ epginfo.dict|dict2items }}"
