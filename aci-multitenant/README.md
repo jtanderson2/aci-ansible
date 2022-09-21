@@ -9,4 +9,5 @@ Run from within the project root folder with:
 In the example above, we are running the vars file from the 'C3AAA' customer folder. Add more customer folders and vars as required.
 
 This is being run against the Cisco DevNet 'always-on' ACI sandbox, which is an excellent free resource for testing ACI automation...
+https://sandboxapicdc.cisco.com
 
