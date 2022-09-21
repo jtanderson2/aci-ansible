@@ -1,0 +1,5 @@
+index,pg,lag
+1,S1-PG,leaf
+2,S2-PG,leaf
+3,S3-PG,node
+4,S4-PG,node

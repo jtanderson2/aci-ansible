@@ -1,0 +1,38 @@
+---
+- name: INTERFACE POLICY GROUP UPDATE
+  hosts: apic
+  connection: local
+  gather_facts: False
+  
+  vars_prompt:
+    - name: username
+      prompt: "Please enter ACI username"
+      private: no
+    - name: password 
+      prompt: "password"
+      private: yes
+    
+  tasks:
+    - read_csv:
+        path: pg.csv
+        key: index
+      register: pg
+    
+    - debug:
+        msg: "{{ item.key }}:
+              {{ item.value.pg }},
+              {{ item.value.lag }}"
+      loop: "{{ pg.dict|dict2items }}"
+
+    - name: ENABLE BPDUGUARD AND STORM CONTROL
+      cisco.aci.aci_interface_policy_leaf_policy_group:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        lag_type: "{{ item.value.lag }}"
+        policy_group: "{{ item.value.pg }}"
+        storm_control_interface_policy: Storm-Control-10K
+        stp_interface_policy: Enable-Bpduguard
+        state: present
+        validate_certs: False    
+      loop: "{{ pg.dict|dict2items }}"
