@@ -10,7 +10,7 @@ This is being run against the Cisco DevNet 'always-on' ACI sandbox: https://sand
 
 The playbook has user interactive APIC username/password which for the sandbox is admin/!v3G@!4@Y
 
-Amend the CSV to match your use-case and run from within the project root folder with:
+Amend the CSV and playbook to match your use-case and run from within the project root folder with:
 
 ```ansible-playbook policy-group-update.yaml```
 
