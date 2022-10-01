@@ -14,4 +14,4 @@ Amend the CSV and playbook to match your use-case and run from within the projec
 
 ```ansible-playbook policy-group-update.yaml```
 
-Note, this will create the Policy Groups defined in CSV if they don't exsit already, so can be also be used for initial deployment purposes.
+Note, this will create the Policy Groups defined in CSV if they don't exsit already, so the approach can be also be used for initial deployment purposes.
