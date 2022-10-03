@@ -13,7 +13,7 @@ Amend the CSV to match your use-case and run from within the project root folder
 
 You can find all the EPGs associate with a given VMM using the following moquery command from the APIC CLI; it then needs parsing into CSV format ;)
 
-```moquery -c fvAEPg -x query-target=children | grep OLDVMM | grep dn```
+```moquery -c fvAEPg -x query-target=children | grep OLDVMM | grep dn | grep -v rtinfraFuncToEpg```
 
 This approach could just as easily be used to add a VMM to multiple EPGs (change 'state' to 'present') or the for adding/removing Physical Domains. See module [documentation](https://docs.ansible.com/ansible/latest/collections/cisco/aci/aci_epg_to_domain_module.html#ansible-collections-cisco-aci-aci-epg-to-domain-module)
 
