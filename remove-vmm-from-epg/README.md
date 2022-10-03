@@ -1,6 +1,6 @@
 # Remove VMM from EPGs
 
-When you delete an obsolete VMM domain from the APIC, it doesn't delete the relationships to the EPGs that were using it....and that could be 100s of EPGs, hence would be super tedious to delete those relationships manually! This little playbook was written to remove the 'missing-targets' en-masse using a CSV as the EPG data source.
+When you delete an obsolete VMM domain from the APIC, it doesn't delete the relationships to the EPGs that were using it....and that could be 100s of EPGs, hence would be super tedious having to delete those relationships manually! This little playbook was written to remove the 'missing-targets' en-masse using a CSV as the EPG data source.
 
 This example is being run against the Cisco DevNet 'always-on' ACI sandbox:
 https://sandboxapicdc.cisco.com
